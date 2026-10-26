@@ -71,7 +71,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Kind Cluster
-        uses: helm/kind-action@v1.10.0
+        uses: helm/kind-action@v1.8.0
+        with:
+          cluster_name: staging-cluster
 
       - name: Verificar Clúster
         run: |
@@ -82,11 +84,11 @@ jobs:
         with:
           version: 'v3.13.0'
 
-      - name: Configurar Kubeconfig
-        run: |
-          mkdir -p ~/.kube
-          echo "${{ secrets.KUBECONFIG_RAW }}" > ~/.kube/config
-          chmod 600 ~/.kube/config
+     # - name: Configurar Kubeconfig
+     #   run: |
+     #     mkdir -p ~/.kube
+     #     echo "${{ secrets.KUBECONFIG_RAW }}" > ~/.kube/config
+     #     chmod 600 ~/.kube/config
 
       - name: Actualizar/Instalar Release en Staging
         run: |
