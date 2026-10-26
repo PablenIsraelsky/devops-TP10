@@ -70,6 +70,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Kind Cluster
+        uses: helm/kind-action@v1.10.0
+
+      - name: Verificar Clúster
+        run: |
+          kubectl cluster-info
+          kubectl get nodes
+
       - uses: azure/setup-helm@v4
         with:
           version: 'v3.13.0'
